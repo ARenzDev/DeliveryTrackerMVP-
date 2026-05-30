@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  api:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tracker_api
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/tracker
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PORT=3000
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - tracker_network
+
+  mongo:
+    image: mongo:latest
+    container_name: tracker_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - tracker_network
+
+  redis:
+    image: redis:alpine
+    container_name: tracker_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - tracker_network
+
+volumes:
+  mongo_data:
+
+networks:
+  tracker_network:
+    driver: bridge
