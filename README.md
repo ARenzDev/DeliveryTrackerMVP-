@@ -40,12 +40,18 @@ cd backend
 npm run test:e2e
 ```
 
+**Mobile UI Integration Tests:**
+```bash
+cd mobile
+npm test
+```
+
 ## Scaling & CI/CD Strategy (DevOps)
 
 ### CI/CD Pipeline
 A robust CI/CD pipeline (using GitHub Actions or GitLab CI) for this project would look like this:
 1. **Linting & Type Checking:** Run ESLint and TypeScript compilation.
-2. **Testing:** Run unit and E2E tests (`npm run test:e2e`).
+2. **Testing:** Run unit and E2E tests (`npm run test:e2e` for backend, `npm test` for mobile).
 3. **Build:** Build the Docker image for the backend (`docker build -t orders-api .`).
 4. **Publish:** Push the image to a container registry (e.g., AWS ECR or Docker Hub).
 5. **Deploy:** Trigger a deployment to a staging environment (e.g., AWS ECS or EKS).
@@ -60,5 +66,5 @@ If the application needs to handle a massive volume of real-time events, the cur
 - [x] **Arquitectura:** Modular code in NestJS (Modules, Providers, DTOs). Clean separation of hooks/services in React Native.
 - [x] **Manejo de TypeScript & Estado:** Strict types, clean async state management, WebSockets synchronization.
 - [x] **Inglés (Bilingüe):** Code, comments, and README in English.
-- [x] **E2E / Integración Testing:** E2E test verifying API -> DB -> WebSocket flow robustly.
+- [x] **E2E / Integración Testing:** Backend E2E test verifying API -> DB -> WebSocket flow, and Mobile UI integration test using React Native Testing Library verifying the full user flow (form -> api -> websocket -> ui list update).
 - [x] **Infraestructura y Escalabilidad:** Multi-stage Dockerfile, Docker Compose, and scaling strategies documented.
