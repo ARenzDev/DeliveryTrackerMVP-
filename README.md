@@ -62,9 +62,3 @@ If the application needs to handle a massive volume of real-time events, the cur
 - **Kafka for Heavy Messaging:** Instead of direct REST calls for critical operations, we can introduce **Apache Kafka**. When an order is created, it is published to a Kafka topic. A consumer microservice then processes it, saves it to MongoDB, and triggers the WebSocket notification. This decouples ingestion from processing, allowing the system to absorb massive traffic spikes without dropping orders.
 - **Microservices Communication:** If the system is split into multiple microservices (e.g., `OrdersService`, `NotificationsService`, `UsersService`), we would use **gRPC** for low-latency, strongly-typed internal communication instead of HTTP REST.
 
-## Evaluation Criteria Met
-- [x] **Arquitectura:** Modular code in NestJS (Modules, Providers, DTOs). Clean separation of hooks/services in React Native.
-- [x] **Manejo de TypeScript & Estado:** Strict types, clean async state management, WebSockets synchronization.
-- [x] **Inglés (Bilingüe):** Code, comments, and README in English.
-- [x] **E2E / Integración Testing:** Backend E2E test verifying API -> DB -> WebSocket flow, and Mobile UI integration test using React Native Testing Library verifying the full user flow (form -> api -> websocket -> ui list update).
-- [x] **Infraestructura y Escalabilidad:** Multi-stage Dockerfile, Docker Compose, and scaling strategies documented.
